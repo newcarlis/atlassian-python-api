@@ -786,7 +786,7 @@ class Bamboo(AtlassianRestAPI):
         resource = "permissions/deployment/{}/users".format(deployment_id)
         return self.get(self.resource_url(resource), params=params)
 
-    def revoke_user_from_deployment(self, deployment_id, user, permissions=["READ", "WRITE", "BUILD"]):
+    def revoke_user_from_deployment(self, deployment_id, user, permissions=None):
         """
         Revokes deployment project permissions from a given user.
         :param deployment_id:
@@ -794,6 +794,7 @@ class Bamboo(AtlassianRestAPI):
         :param permissions:
         :return:
         """
+        permissions = ["READ", "WRITE", "BUILD"] if permissions is None else permissions
         resource = "permissions/deployment/{}/users/{}".format(deployment_id, user)
         return self.delete(self.resource_url(resource), data=permissions)
 
@@ -825,7 +826,7 @@ class Bamboo(AtlassianRestAPI):
         resource = "permissions/deployment/{}/groups".format(deployment_id)
         return self.get(self.resource_url(resource), params=params)
 
-    def revoke_group_from_deployment(self, deployment_id, group, permissions=["READ", "WRITE", "BUILD"]):
+    def revoke_group_from_deployment(self, deployment_id, group, permissions=None):
         """
         Revokes deployment project permissions from a given group.
         :param deployment_id:
@@ -833,6 +834,7 @@ class Bamboo(AtlassianRestAPI):
         :param permissions:
         :return:
         """
+        permissions = ["READ", "WRITE", "BUILD"] if permissions is None else permissions
         resource = "permissions/deployment/{}/groups/{}".format(deployment_id, group)
         return self.delete(self.resource_url(resource), data=permissions)
 
@@ -864,7 +866,7 @@ class Bamboo(AtlassianRestAPI):
         resource = "permissions/environment/{}/users".format(environment_id)
         return self.get(self.resource_url(resource), params=params)
 
-    def revoke_user_from_environment(self, environment_id, user, permissions=["READ", "WRITE", "BUILD"]):
+    def revoke_user_from_environment(self, environment_id, user, permissions=None):
         """
         Revokes deployment environment permissions from a given user.
         :param environment_id:
@@ -872,6 +874,7 @@ class Bamboo(AtlassianRestAPI):
         :param permissions:
         :return:
         """
+        permissions = ["READ", "WRITE", "BUILD"] if permissions is None else permissions
         resource = "permissions/environment/{}/users/{}".format(environment_id, user)
         return self.delete(self.resource_url(resource), data=permissions)
 
@@ -903,7 +906,7 @@ class Bamboo(AtlassianRestAPI):
         resource = "permissions/environment/{}/groups".format(environment_id)
         return self.get(self.resource_url(resource), params=params)
 
-    def revoke_group_from_environment(self, environment_id, group, permissions=["READ", "WRITE", "BUILD"]):
+    def revoke_group_from_environment(self, environment_id, group, permissions=None):
         """
         Revokes deployment environment permissions from a given group.
         :param environment_id:
@@ -911,6 +914,7 @@ class Bamboo(AtlassianRestAPI):
         :param permissions:
         :return:
         """
+        permissions = ["READ", "WRITE", "BUILD"] if permissions is None else permissions
         resource = "permissions/environment/{}/groups/{}".format(environment_id, group)
         return self.delete(self.resource_url(resource), data=permissions)
 
