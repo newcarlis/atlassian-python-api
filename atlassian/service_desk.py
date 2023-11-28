@@ -377,7 +377,7 @@ class ServiceDesk(AtlassianRestAPI):
 
         return self.delete(url, headers=self.experimental_headers)
 
-    def add_users_to_organization(self, organization_id, users_list=[], account_list=[]):
+    def add_users_to_organization(self, organization_id, users_list=None, account_list=None):
         """
         Adds users to an organization
         users_list is a list of strings
@@ -388,13 +388,15 @@ class ServiceDesk(AtlassianRestAPI):
         :param users_list: list
         :return:
         """
+        users_list = [] if users_list is None else users_list
+        account_list = [] if account_list is None else account_list
         log.warning("Adding users...")
         url = "rest/servicedeskapi/organization/{}/user".format(organization_id)
         data = {"usernames": users_list, "accountIds": account_list}
 
         return self.post(url, headers=self.experimental_headers, data=data)
 
-    def remove_users_from_organization(self, organization_id, users_list=[], account_list=[]):
+    def remove_users_from_organization(self, organization_id, users_list=None, account_list=None):
         """
         Removes users from an organization
         users_list is a list of strings
@@ -405,6 +407,8 @@ class ServiceDesk(AtlassianRestAPI):
         :param account_list: list
         :return:
         """
+        users_list = [] if users_list is None else users_list
+        account_list = [] if account_list is None else account_list
         log.warning("Removing users...")
         url = "rest/servicedeskapi/organization/{}/user".format(organization_id)
         data = {"usernames": users_list, "accountIds": account_list}
@@ -631,7 +635,7 @@ class ServiceDesk(AtlassianRestAPI):
 
         return self.get(url, headers=self.experimental_headers, params=params)
 
-    def add_customers(self, service_desk_id, list_of_usernames=[], list_of_accountids=[]):
+    def add_customers(self, service_desk_id, list_of_usernames=None, list_of_accountids=None):
         """
         Adds one or more existing customers to the given service desk.
         If you need to create a customer, see Create customer method.
@@ -644,13 +648,15 @@ class ServiceDesk(AtlassianRestAPI):
         :param list_of_accountids: list
         :return: the customers added to the service desk
         """
+        list_of_usernames = [] if list_of_usernames is None else list_of_usernames
+        list_of_accountids = [] if list_of_accountids is None else list_of_accountids
         url = "rest/servicedeskapi/servicedesk/{}/customer".format(service_desk_id)
         data = {"usernames": list_of_usernames, "accountIds": list_of_accountids}
 
         log.info("Adding customers...")
         return self.post(url, headers=self.experimental_headers, data=data)
 
-    def remove_customers(self, service_desk_id, list_of_usernames=[], list_of_accountids=[]):
+    def remove_customers(self, service_desk_id, list_of_usernames=None, list_of_accountids=None):
         """
         Removes one or more customers from a service desk. The service
         desk must have closed access. If any of the passed customers are
@@ -662,6 +668,8 @@ class ServiceDesk(AtlassianRestAPI):
         :param list_of_accountids: list
         :return: the customers added to the service desk
         """
+        list_of_usernames = [] if list_of_usernames is None else list_of_usernames
+        list_of_accountids = [] if list_of_accountids is None else list_of_accountids
         url = "rest/servicedeskapi/servicedesk/{}/customer".format(service_desk_id)
         data = {"usernames": list_of_usernames, "accountIds": list_of_accountids}
 
